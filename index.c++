@@ -152,6 +152,17 @@ int main()
         routeName2 = 'K';
     }
 
+    //Zunnu
+//one bus assignment module
+int busID[8] = { 1,2,3,4,5,6,7,8 };
+int busSeats[8] = { 30,30,50,30,60,50,50,60 };
+if (startingPoint == 'L' || startingPoint == 'l' && endingPoint == 'K' || endingPoint == 'k')
+{
+    cout << "Bus ID: " << busID[0]<<endl;
+    cout << "Route ID: " << routeID[0] << endl;
+    cout << "Total seats are: " << busSeats[0] << endl;
+
+}//
         
 
     return 0;
