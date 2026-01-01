@@ -5,7 +5,7 @@ int main()
 {
 
     // MODULE 1
-    
+
     // 8 Routes
     int routeID[8] = { 101, 102, 103, 104, 105, 106, 107, 108 };
     // char routeName[8]={'L', 'I', 'K', 'M', 'F', 'S', 'R', 'G'};
@@ -154,16 +154,17 @@ int main()
 
     //Zunnu
 //one bus assignment module
-int busID[8] = { 1,2,3,4,5,6,7,8 };
-int busSeats[8] = { 30,30,50,30,60,50,50,60 };
-if (startingPoint == 'L' || startingPoint == 'l' && endingPoint == 'K' || endingPoint == 'k')
-{
-    cout << "Bus ID: " << busID[0]<<endl;
-    cout << "Route ID: " << routeID[0] << endl;
-    cout << "Total seats are: " << busSeats[0] << endl;
+    int busID[8] = { 1,2,3,4,5,6,7,8 };
+    int busSeats[8] = { 30,30,50,30,60,50,50,60 };
+    if (startingPoint == 'L' || startingPoint == 'l' && endingPoint == 'K' || endingPoint == 'k')
+    {
+        cout << "Bus ID: " << busID[0] << endl;
+        cout << "Route ID: " << routeID[0] << endl;
+        cout << "Total seats are: " << busSeats[0] << endl;
 
-}//
-        
+    }
+    else if(startingPoint == 'K' || startingPoint == 'k' )
+
 
     return 0;
 }
