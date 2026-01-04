@@ -68,6 +68,41 @@ int main()
     Updates: Every time you book a student (Option 5), you increase this number (+1). Every time you cancel (Option 7), you decrease it (-1).
     */
 
+    //Z
+    //module 3 student registration for transport (for 200 students)
+    int alocationID[200];
+    int studentID[200];
+    char studentName[2000]; // 10*200 bcz we will take 0to10
+    char studentDepartment[2000];
+    int semester[200];
+    char studentContactNumber[2200]; // 200 student contact no with 11 char is 2200 ie 200*11
+    int routeIDallocation[200];
+    int busIDAllocation[200];
+    int seatNumber[200];
+    int feeStatus[200];
+
+    //inizializing allocations variables of module3 
+    for (int studentallocations = 0; studentallocations < 200; studentallocations++)
+    {
+         alocationID[studentallocations] = -1;
+         studentID[studentallocations] = -1;
+         semester[studentallocations] = 0;
+         routeIDallocation[studentallocations] = -1;
+         busIDAllocation[studentallocations] = -1;
+         seatNumber[studentallocations] = 0;
+         feeStatus[studentallocations] = 0;
+    }
+    for (int studentNameAndDepartment = 0; studentNameAndDepartment < 2000; studentNameAndDepartment++)
+    {
+        studentName[studentNameAndDepartment] = '\0';
+        studentDepartment[studentNameAndDepartment] = '0';
+    }
+    for (int contactsOfStudents = 0; contactsOfStudents < 2200; contactsOfStudents++)
+    {
+        studentContactNumber[contactsOfStudents] = '\0';
+    }
+    //Z
+    
 
 
     cout << "--------------------------------------------" << endl;
@@ -96,8 +131,8 @@ int main()
     cout << endl;
     do
     {
-      
-        
+
+
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -181,7 +216,7 @@ int main()
 
             cout << "All Routes and Bus Records have been Successfully Cleared." << endl;
             cout << endl;
-          
+
         }
         break;
         case 2:
@@ -339,7 +374,7 @@ int main()
                 int TemporaryBusID;
                 cout << "Enter New Bus ID -- Eg.(501): ";
                 cin >> TemporaryBusID;
-                
+
                 // Process of Checking Duplicate Bus IDs.
                 bool BusIDExists = false;
                 for (int busIDExistsCounter = 0; busIDExistsCounter < 6; busIDExistsCounter++)
@@ -511,11 +546,36 @@ Print Row: Show all the details in one line.
             cout << endl;
 
         }
-        break;
-        case 5:
+        break;          //z
+        case 5: // allocate seats to student  //Z
         {
             cout << "Allocate Seat to Student selected." << endl;
-        }
+            cout << endl;
+            cout << "Student Seat Allocation" << endl;
+            // route exists or not? if not then we will ask to add the route
+            bool hasRoute = false;
+            for (int routecheck = 0; routecheck < 6; routecheck++)
+            {
+                if (RouteID[routecheck] != -1)  
+                {
+                    hasRoute = true;        // means it has route
+                    break;
+                }
+            }
+
+            if (!hasRoute)  //if there is no route available 
+            {
+                cout << "No routes are available . first add the routes." << endl;
+                break; // no route r there so we will break
+            }
+
+            //now we will find the empty slots and max are 200 allocation
+            int alocationIndex = -1;
+            
+
+
+
+        }//Z
         break;
         case 6:
         {
