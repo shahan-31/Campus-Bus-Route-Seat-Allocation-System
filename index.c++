@@ -84,13 +84,13 @@ int main()
     //inizializing allocations variables of module3 
     for (int studentallocations = 0; studentallocations < 200; studentallocations++)
     {
-         alocationID[studentallocations] = -1;
-         studentID[studentallocations] = -1;
-         semester[studentallocations] = 0;
-         routeIDallocation[studentallocations] = -1;
-         busIDAllocation[studentallocations] = -1;
-         seatNumber[studentallocations] = 0;
-         feeStatus[studentallocations] = 0;
+        alocationID[studentallocations] = -1;
+        studentID[studentallocations] = -1;
+        semester[studentallocations] = 0;
+        routeIDallocation[studentallocations] = -1;
+        busIDAllocation[studentallocations] = -1;
+        seatNumber[studentallocations] = 0;
+        feeStatus[studentallocations] = 0;
     }
     for (int studentNameAndDepartment = 0; studentNameAndDepartment < 2000; studentNameAndDepartment++)
     {
@@ -102,7 +102,7 @@ int main()
         studentContactNumber[contactsOfStudents] = '\0';
     }
     //Z
-    
+
 
 
     cout << "--------------------------------------------" << endl;
@@ -551,12 +551,13 @@ Print Row: Show all the details in one line.
         {
             cout << "Allocate Seat to Student selected." << endl;
             cout << endl;
-            cout << "Student Seat Allocation" << endl;
+            cout << "Student Seat Allocation" << endl;  
+            cout << endl;
             // route exists or not? if not then we will ask to add the route
             bool hasRoute = false;
             for (int routecheck = 0; routecheck < 6; routecheck++)
             {
-                if (RouteID[routecheck] != -1)  
+                if (RouteID[routecheck] != -1)
                 {
                     hasRoute = true;        // means it has route
                     break;
@@ -571,7 +572,7 @@ Print Row: Show all the details in one line.
 
             //now we will find the empty slots and max are 200 allocation
             int alocationIndex = -1;
-            
+
 
 
 
