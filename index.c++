@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 
@@ -176,7 +177,7 @@ and then 6th Route Ending is till 180.
     cout << endl;
     cout << endl;
     cout << endl;
-    
+
     do
     {
         cout << "----------------------------------------------------------------------------------------" << endl;
@@ -223,7 +224,7 @@ and then 6th Route Ending is till 180.
                 RouteStops[routeCounter] = 0;
                 // We wrote 0 because an empty route has no stops.
 
-                
+
                 int StartingPointOfLockerOfRoute = routeCounter * 30;
                 // This tells us where this route starts from.
 
@@ -637,13 +638,88 @@ Print Row: Show all the details in one line.
         {
             cout << "Allocate Seat to Student selected." << endl;
             cout << endl;
-            cout << "Student Seat Allocation" << endl;  
+            cout << "Student Seat Allocation" << endl;
             cout << endl;
+            
+
+            //now we will find the empty slots and max are 200 allocation
+            int alocationIndex = -1;
+            for (int emptySlot = 0; emptySlot < 200; emptySlot)
+            {
+                if (alocationID[emptySlot] == -1) //this will check if any allocation id is free
+                {
+                    alocationIndex = emptySlot;  //this is to check empty allocation
+                    break;                       //and it will store available slot 
+                }
+            }
+            if (alocationIndex == -1)    //this means that there is no empty slot available
+            {
+                cout << "All are full.Error." << endl;
+                break;
+            }
+            // Now we will take allocation ID and it will be unique not same as another
+            cout << "Enter the Allocation ID (unique ID): ";
+            cin >> alocationID[alocationIndex];
+
+            // chech if the user will enter the duplicate ID
+            for (int duplicateID = 0; duplicateID < 200; duplicateID++)
+            {
+                if (duplicateID != alocationIndex && alocationID[duplicateID] == alocationID[alocationIndex])
+                {
+                    cout << "Id already exists!" << endl;
+                    alocationID[alocationIndex] = -1;
+                    break;
+                }
+            }
+            if (alocationID[alocationIndex] == -1)
+            {
+                break;
+            }
+            //now we will get the id of student
+            cout << "Enter the student ID: ";
+            cin >> studentID[alocationIndex];
+            //now ww will check if student has already alloacted slot ..
+            for (int activeAllocation = 0; activeAllocation < 200; ++activeAllocation)
+            {
+                if (activeAllocation != alocationIndex && alocationID[activeAllocation] != -1 && studentID[activeAllocation] == studentID[alocationIndex])
+                {
+                    cout << " Student already has seat allocated." << endl;
+                    alocationID[alocationIndex] = -1;
+                    break;
+                }
+            }
+            if (alocationID[alocationIndex] == -1)
+            {
+                break;
+            }
+            //now student details
+            int nameStudent = alocationIndex * 10;
+            int departmentStudent = alocationIndex * 10;
+            int contactStudent = alocationIndex * 11; //bcz we took 11 no for contact
+            /*this is bcz
+             if allocation index is 0 then
+             0*10 = 0 means start from 0
+             and if 1*10=10 that means we start
+             from position 10*/
+
+            cout << "Enter Student Name(0to10): ";
+            cin.ignore();
+            cin.getline(&studentName[nameStudent], 10);
+            cout << "Enter Department of student: ";
+            cin.getline(&studentDepartment[departmentStudent], 10);
+            cout << "Enter the semester (1to8): ";
+            cin >> semester[alocationIndex];
+
+            cout << "Enter contact no: ";
+            cin.ignore();
+            cin.getline(&studentContactNumber[contactStudent], 11);
+            cout << "Enter the Route ID: ";
+            cin >> routeIDallocation[alocationIndex];
             // route exists or not? if not then we will ask to add the route
             bool hasRoute = false;
             for (int routecheck = 0; routecheck < 6; routecheck++)
             {
-                if (RouteID[routecheck] != -1)
+                if (RouteID[routecheck] == routeIDallocation[alocationIndex])
                 {
                     hasRoute = true;        // means it has route
                     break;
@@ -653,15 +729,98 @@ Print Row: Show all the details in one line.
             if (!hasRoute)  //if there is no route available 
             {
                 cout << "No routes are available . first add the routes." << endl;
+                alocationID[alocationIndex] = -1;
                 break; // no route r there so we will break
             }
+            cout << "Enter Bus ID: ";
+            cin >> busIDAllocation[alocationIndex];
+            // now this will chech bus is there or not
+            bool busExist = false;
+            int busIndex = -1;
+            for (int busAssigment = 0; busAssigment < 6; busAssigment++)
+            {
+                if (BusID[busAssigment] == busIDAllocation[alocationIndex])
+                {
+                    if (BusRouteID[busAssigment] == routeIDallocation[alocationIndex])//chech that is bus existes dor this route
+                    {
+                        busExist = true;
+                        busIndex = busAssigment;
+                        break;
+                    }
+                    else {
+                        cout << "Bus is not assigned for this route." << endl;
+                        alocationID[alocationIndex] = -1;
+                        break;
+                    }
+                }
+            }
+            if (!busExist)
+            {
+                if (alocationID[alocationIndex] != -1)
+                {
+                    cout << "Bus do not exists." << endl;
+                    alocationID[alocationIndex] = -1;
+                }
+                break;
+            }
+            //now we will check if seats are full..
+            if (BusSelectedSeats[busIndex] >= BusCapacity[busIndex])
+            {
+                cout << " Bus seats are full. ";
+                alocationID[alocationIndex] = -1;
+                break;
 
-            //now we will find the empty slots and max are 200 allocation
-            int alocationIndex = -1;
+            }
+            //..
+            cout << "Enter Seat no(1-" << BusCapacity[busIndex] << "): ";
+            cin >> seatNumber[alocationIndex];
 
-
-
-
+            //now we will check if user user invalid no of seat..
+            
+                if (seatNumber[alocationIndex] < 1 || seatNumber[alocationIndex]>BusCapacity[busIndex])
+                {
+                    cout << "Invalid seat no bcz each bus has 30 seats." << endl;
+                    alocationID[alocationIndex] = -1;
+                    break;
+                }
+            
+            //now we will check if seat is already assigned on bus
+            for (int seat = 1; seat < 200; ++seat)
+            {
+                if (alocationID[seat] != -1 && busIDAllocation[seat] == busIDAllocation[alocationIndex] && seatNumber[seat] == seatNumber[alocationIndex])
+                {
+                    cout << "Seat is already occupied by another student." << endl;
+                    alocationID[alocationIndex] = -1;
+                    break;
+                }
+            }
+            if (alocationID[alocationIndex] == -1) {
+                break;
+            }
+            cout << "Enter fee status (0 for unpaid or 1 for paid): ";
+            cin >> feeStatus[alocationIndex];
+            if (feeStatus[alocationIndex] != 0 && feeStatus[alocationIndex] != 1)
+            {
+                cout << "invalid status.We will assume unpaid." << endl;
+                feeStatus[alocationIndex] = 0;
+            }
+            BusSelectedSeats[busIndex]++;
+            cout << endl;
+            cout << "==================================================" << endl;
+            cout << "          Seat  Alocated Succesfully!             " << endl;
+            cout << "==================================================" << endl;
+            cout << "Alocation ID: " << alocationID[alocationIndex] << endl;
+            cout << "Student ID: " << studentID[alocationIndex] << endl;
+            cout << "Route: " << routeIDallocation[alocationIndex] << endl;
+            cout << "Bus: " << busIDAllocation[alocationIndex] << endl;
+            cout << "Seat: " << seatNumber[alocationIndex] << endl;
+            if (feeStatus[alocationIndex] == 1)
+            {
+                cout << "Fee Status: Paid "  << endl;
+            }
+            else {
+                cout << "Fee Status: UnPaid "  << endl;
+            }
         }//Z
         break;
         case 6:
