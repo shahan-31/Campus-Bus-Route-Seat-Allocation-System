@@ -1280,7 +1280,7 @@ Print Row: Show all the details in one line.
             {
                 bool SeatOccupied = false;
                 for (int allocationCounter = 0; allocationCounter < 200; allocationCounter++)
-                {
+                {                                                                 //means student is in the bus                  //student sitting on exact seat
                     if (AllocationID[allocationCounter] != -1 && BusIDAllocation[allocationCounter] == TargetBus && SeatNumber[allocationCounter] == seatCounter)
                     {
                         SeatOccupied = true;
@@ -1311,6 +1311,9 @@ Print Row: Show all the details in one line.
                     cout << "   ";
                 }
             }
+            /*For every seat in bus chech all studebts alocation if someone
+            id sitiing there print [XX] otherwise print the seat no.
+            there r 4 seats in a row with walking space after ecery 2 seats*/
             cout << endl;
 
         }
